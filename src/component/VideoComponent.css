@@ -1,0 +1,14 @@
+.video-component {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container input[type="text"] {
+  margin-right: 10px;
+}
