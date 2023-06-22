@@ -1,37 +1,56 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Hls from "hls.js";
 
 const VideoContainer = () => {
   const [videoUrl, setVideoUrl] = useState("");
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const checkVideoUrlValidity = async (url) => {
+      try {
+        const response = await fetch(url);
+        console.log("res: ", response);
+        if (response.ok) {
+          loadVideo(url);
+        } else {
+          console.log("유효하지 않은 URL입니다.");
+        }
+      } catch (error) {
+        console.error("요청 중 오류가 발생했습니다.", error);
+      }
+    };
+
+    const loadVideo = (url) => {
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+
+        hls.loadSource(url);
+        hls.attachMedia(videoRef.current);
+      } else if (
+        videoRef.current.canPlayType("application/vnd.apple.mpegurl")
+      ) {
+        videoRef.current.src = url;
+      }
+    };
+
+    if (videoUrl) {
+      checkVideoUrlValidity(videoUrl);
+    }
+  }, [videoUrl]);
 
   const handleUrlChange = (event) => {
     setVideoUrl(event.target.value);
   };
 
-  const handlePlayVideo = () => {
-    const video = document.getElementById("videoPlayer");
-    video.src = videoUrl;
-    video.load();
-    video.play();
-  };
-
   return (
-    <div className="video-component">
-      <div className="input-container">
-        <input
-          type="text"
-          value={videoUrl}
-          onChange={handleUrlChange}
-          placeholder="영상 주소를 입력하세요"
-        />
-        <button onClick={handlePlayVideo}>재생</button>
-      </div>
-
-      {videoUrl && (
-        <video id="videoPlayer" controls>
-          <source src={videoUrl} type="application/x-mpegURL" />
-          Your browser does not support the video tag.
-        </video>
-      )}
+    <div>
+      <input
+        type="text"
+        value={videoUrl}
+        onChange={handleUrlChange}
+        placeholder="영상 주소를 입력하세요"
+      />
+      <video ref={videoRef} width={1080} height={720} controls></video>
     </div>
   );
 };
