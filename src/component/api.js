@@ -29,8 +29,8 @@ const AdiComponent = () => {
       <ul className="data-list">
         {apiData && (
           <ul>
-            {apiData.map((item, n, arr) => (
-              <li key={n}>{item.message}</li>
+            {Object.values(apiData.body).map((value, index) => (
+              <li key={index}>{value}</li>
             ))}
           </ul>
         )}
