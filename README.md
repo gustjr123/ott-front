@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Vod Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project start for vod app for front
 
 ## Available Scripts
 
