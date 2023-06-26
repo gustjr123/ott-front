@@ -44,7 +44,14 @@ const TokenComponent = () => {
         />
         <button onClick={handleApiRequest}>OK</button>
       </div>
-      <ul className="data-list">{apiData && <li>{apiData}</li>}</ul>
+      <ul className="data-list">
+        {apiData && (
+          <div>
+            <p>Access Token: {apiData.accessToken}</p>
+            <p>Video Link: {apiData.VideoLink}</p>
+          </div>
+        )}
+      </ul>
     </div>
   );
 };
