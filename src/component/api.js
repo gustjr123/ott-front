@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import "./AdiComponent.css"; // CSS 파일 임포트
+import "../styles/ApiComponent.css"; // CSS 파일 임포트
 
-const AdiComponent = () => {
-  const [apiUrl, setApiUrl] = useState("");
+const Card = ({ value }) => {
+  return (
+    <div className="card">
+      <p>{value}</p>
+    </div>
+  );
+};
+
+const ApiComponent = () => {
+  const [apiUrl, setApiUrl] = useState("http://localhost:5000/test");
   const [apiData, setApiData] = useState(null);
 
   const handleApiUrlChange = (event) => {
@@ -13,7 +21,8 @@ const AdiComponent = () => {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      setApiData(data);
+
+      setApiData(data?.body?.data);
       console.log(data);
     } catch (error) {
       console.error("API 요청 에러:", error);
@@ -21,22 +30,34 @@ const AdiComponent = () => {
   };
 
   return (
-    <div className="adi-component">
+    <div className="api-component">
       <div className="input-container">
         <input type="text" value={apiUrl} onChange={handleApiUrlChange} />
         <button onClick={handleApiRequest}>OK</button>
       </div>
-      <ul className="data-list">
-        {apiData && (
-          <ul>
-            {Object.values(apiData.body).map((value, index) => (
-              <li key={index}>{value}</li>
-            ))}
-          </ul>
+      <div className="data-list-container">
+        {apiData ? (
+          Array.isArray(apiData) ? (
+            <ul className="data-list">
+              {apiData.map((value, index) => (
+                <li key={index}>
+                  <Card value={value} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div>
+              <p>Data is Something wrong</p>
+            </div>
+          )
+        ) : (
+          <div>
+            <p>Can't Get items. Check your URL!</p>
+          </div>
         )}
-      </ul>
+      </div>
     </div>
   );
 };
 
-export default AdiComponent;
+export default ApiComponent;
