@@ -30,19 +30,19 @@ function CookieComponent() {
         console.log("fetchfetch!!!!", Cookie);
 
         setCookie("CloudFront-Policy", Cookie.Policy, {
-          domain: ".showstone.shop",
+          domain: ".sehee.shop",
           path: "/",
           secure: true,
         });
 
         setCookie("CloudFront-Signature", Cookie.Signature, {
-          domain: ".showstone.shop",
+          domain: ".sehee.shop",
           path: "/",
           secure: true,
         });
 
         setCookie("CloudFront-Key-Pair-Id", Cookie.KeyPair, {
-          domain: ".showstone.shop",
+          domain: ".sehee.shop",
           path: "/",
           secure: true,
         });
