@@ -16,6 +16,7 @@ function CookieComponent() {
   };
 
   const handleOkClick = () => {
+    console.log(apiUrl);
     const url = apiUrl + `?path=${encodeURIComponent(path)}`;
 
     fetch(url, {
