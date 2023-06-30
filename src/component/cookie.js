@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
-const apiUrl = process.env.API_COOKIE_URL;
+const apiUrl = "https://web.sehee.shop/prod/cookie";
 
 function CookieComponent() {
   const [path, setPath] = useState("");
