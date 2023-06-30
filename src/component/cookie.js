@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
 
-const apiUrl = `https://api.showstone.shop/production/cookie`;
+const apiUrl = process.env.API_COOKIE_URL;
 
 function CookieComponent() {
   const [path, setPath] = useState("");
