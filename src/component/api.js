@@ -1,13 +1,6 @@
 import React, { useState } from "react";
+import Card from "./Card"; // Card 컴포넌트를 임포트합니다
 import "../styles/ApiComponent.css"; // CSS 파일 임포트
-
-const Card = ({ value }) => {
-  return (
-    <div className="card">
-      <p>{value}</p>
-    </div>
-  );
-};
 
 const ApiComponent = () => {
   const [apiUrl, setApiUrl] = useState("http://localhost:5000/test");
@@ -41,7 +34,12 @@ const ApiComponent = () => {
             <ul className="data-list">
               {apiData.map((value, index) => (
                 <li key={index}>
-                  <Card value={value} />
+                  <Card
+                    value={value}
+                    url={
+                      "https://thumb.mt.co.kr/06/2023/05/2023053111324385625_1.jpg/dims/optimize/"
+                    }
+                  />
                 </li>
               ))}
             </ul>
