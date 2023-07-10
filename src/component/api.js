@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
-import RefreshButton from "./RefreshButton";
 import "../styles/ApiComponent.css";
 
 const ApiComponent = () => {
@@ -22,25 +21,15 @@ const ApiComponent = () => {
     handleApiRequest();
   }, []);
 
-  const handleRefresh = () => {
-    handleApiRequest();
-  };
-
   return (
     <div className="api-component">
-      {/* <div className="refresh-button-container">
-        <RefreshButton onRefresh={handleRefresh} />
-      </div> */}
       <div className="data-list-container">
         {apiData ? (
           Array.isArray(apiData) ? (
             <ul className="data-list">
               {apiData.map((value, index) => (
                 <li key={index}>
-                  <Card
-                    value={value}
-                    url="https://thumb.mt.co.kr/06/2023/05/2023053111324385625_1.jpg/dims/optimize/"
-                  />
+                  <Card value={value} />
                 </li>
               ))}
             </ul>
