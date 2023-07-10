@@ -1,19 +1,15 @@
+// Card.js
 import React from "react";
-import { fetchCookie } from "./cookie";
 import "../styles/Card.css";
 
-const Card = ({ value }) => {
+const Card = ({ value, url, onClick }) => {
   const handleCardClick = () => {
-    fetchCookie(value); // cookie.js의 fetchCookie 함수를 호출하여 값을 전달합니다.
+    onClick({ value }); // 클릭 이벤트를 상위 컴포넌트로 전달하면서 이미지 정보도 함께 전달합니다.
   };
 
   return (
     <div className="card" onClick={handleCardClick}>
-      <img
-        src="https://thumb.mt.co.kr/06/2023/05/2023053111324385625_1.jpg/dims/optimize/"
-        alt="Image"
-        className="card-image"
-      />
+      <img src={url} alt="Image" className="card-image" />
       <p>{value}</p>
     </div>
   );
