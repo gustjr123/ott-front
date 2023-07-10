@@ -15,6 +15,7 @@ const ApiComponent = () => {
   const handleApiRequest = async () => {
     try {
       const response = await fetch("https://web.sehee.shop/prod/list");
+      // const response = await fetch("http://localhost:5000/test");
       const data = await response.json();
 
       setApiData(data?.body?.data);
@@ -82,8 +83,8 @@ const ApiComponent = () => {
               {apiData.map((value, index) => (
                 <li key={index}>
                   <Card
-                    value={value}
-                    url="https://thumb.mt.co.kr/06/2023/05/2023053111324385625_1.jpg/dims/optimize/"
+                    value={value.name}
+                    url={value.thumbnail_path}
                     onClick={() => handleImageClick({ value })}
                   />
                 </li>
