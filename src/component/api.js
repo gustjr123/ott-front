@@ -7,7 +7,7 @@ const ApiComponent = () => {
 
   const handleApiRequest = async () => {
     try {
-      const response = await fetch("http://localhost:5000/test");
+      const response = await fetch("https://web.sehee.shop/prod/list");
       const data = await response.json();
 
       setApiData(data?.body?.data);
