@@ -6,14 +6,7 @@
 }
 
 .input-container {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* 가로 중앙 정렬 */
-  margin-bottom: 10px;
-}
-
-.input-container input[type="text"] {
-  margin-right: 10px;
+  display: none; /* 입력창 숨기기 */
 }
 
 .data-list-container {
