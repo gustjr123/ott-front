@@ -1,9 +1,16 @@
+// api.js
 import React, { useState, useEffect } from "react";
 import Card from "./Card";
+import { useCookies } from "react-cookie";
 import "../styles/ApiComponent.css";
 
 const ApiComponent = () => {
   const [apiData, setApiData] = useState(null);
+  const [cookies, setCookie] = useCookies([
+    "CloudFront-Policy",
+    "CloudFront-Signature",
+    "CloudFront-Key-Pair-Id",
+  ]);
 
   const handleApiRequest = async () => {
     try {
@@ -21,6 +28,51 @@ const ApiComponent = () => {
     handleApiRequest();
   }, []);
 
+  const handleImageClick = (imageInfo) => {
+    const { value } = imageInfo;
+    saveCookie(value); // 이미지 클릭 시 쿠키 저장 함수 호출
+  };
+
+  const saveCookie = (value) => {
+    const apiUrl = "https://web.sehee.shop/prod/cookie";
+    const url = `${apiUrl}?path=${encodeURIComponent(value)}`;
+
+    fetch(url, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const { Cookie, Domain, Link, VideoLink } = data.body;
+
+        console.log("fetchfetch!!!!", Cookie);
+
+        setCookie("CloudFront-Policy", Cookie.Policy, {
+          domain: ".sehee.shop",
+          path: "/",
+          secure: true,
+        });
+
+        setCookie("CloudFront-Signature", Cookie.Signature, {
+          domain: ".sehee.shop",
+          path: "/",
+          secure: true,
+        });
+
+        setCookie("CloudFront-Key-Pair-Id", Cookie.KeyPair, {
+          domain: ".sehee.shop",
+          path: "/",
+          secure: true,
+        });
+
+        const linkpath = encodeURIComponent(VideoLink);
+        window.open(`${Link}?link=${linkpath}`);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+
   return (
     <div className="api-component">
       <div className="data-list-container">
@@ -29,7 +81,11 @@ const ApiComponent = () => {
             <ul className="data-list">
               {apiData.map((value, index) => (
                 <li key={index}>
-                  <Card value={value} />
+                  <Card
+                    value={value}
+                    url="https://thumb.mt.co.kr/06/2023/05/2023053111324385625_1.jpg/dims/optimize/"
+                    onClick={() => handleImageClick({ value })}
+                  />
                 </li>
               ))}
             </ul>
