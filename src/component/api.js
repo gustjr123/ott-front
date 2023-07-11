@@ -30,8 +30,7 @@ const ApiComponent = () => {
   }, []);
 
   const handleImageClick = (imageInfo) => {
-    const { name, video_path, thumbnail_path } = imageInfo;
-    console.log("fetch Data: ", name, video_path, thumbnail_path);
+    const { name, video_path, thumbnail_path } = imageInfo["value"];
     saveCookie(video_path); // 이미지 클릭 시 쿠키 저장 함수 호출
   };
 
@@ -47,7 +46,7 @@ const ApiComponent = () => {
       .then((data) => {
         const { Cookie, Domain, Link, VideoLink } = data.body;
 
-        console.log("fetchfetch!!!!", Cookie);
+        console.log("This is Cookie", Cookie);
 
         setCookie("CloudFront-Policy", Cookie.Policy, {
           domain: ".sehee.shop",
