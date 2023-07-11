@@ -30,8 +30,9 @@ const ApiComponent = () => {
   }, []);
 
   const handleImageClick = (imageInfo) => {
-    const { value } = imageInfo;
-    saveCookie(value); // 이미지 클릭 시 쿠키 저장 함수 호출
+    const { name, video_path, thumbnail_path } = imageInfo;
+    console.log("fetch Data: ", name, video_path, thumbnail_path);
+    saveCookie(video_path); // 이미지 클릭 시 쿠키 저장 함수 호출
   };
 
   const saveCookie = (value) => {
