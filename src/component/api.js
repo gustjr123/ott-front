@@ -4,7 +4,7 @@ import Card from "./Card";
 import { useCookies } from "react-cookie";
 import "../styles/ApiComponent.css";
 
-const ApiComponent = () => {
+const ApiComponent = ({ accessToken }) => {
   const [apiData, setApiData] = useState(null);
   const [cookies, setCookie] = useCookies([
     "CloudFront-Policy",
@@ -14,8 +14,11 @@ const ApiComponent = () => {
 
   const handleApiRequest = async () => {
     try {
-      const response = await fetch("https://web.sehee.shop/prod/list");
-      // const response = await fetch("http://localhost:5000/test");
+      const response = await fetch("https://web.sehee.shop/prod/list", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
       const data = await response.json();
 
       setApiData(data?.body?.data);
@@ -27,7 +30,7 @@ const ApiComponent = () => {
 
   useEffect(() => {
     handleApiRequest();
-  }, []);
+  }, [accessToken]);
 
   const handleImageClick = (imageInfo) => {
     const { name, video_path, thumbnail_path } = imageInfo["value"];
