@@ -9,7 +9,7 @@ const Card = ({ value, url, onClick }) => {
 
   return (
     <div className="card" onClick={handleCardClick}>
-      <img src={url} alt="Image" className="card-image" />
+      <input type="image" img src={url} alt="Image" className="card-image" />
       <p>{value}</p>
     </div>
   );
