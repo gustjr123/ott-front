@@ -5,6 +5,12 @@ server {
         root /usr/share/nginx/html;
         index index.html index.htm;
     }
+
+    location /login {
+        root /usr/share/nginx/html;
+        index index.html;
+        rewrite ^/login$ / permanent;
+    }
     
     location /prod {
         resolver 10.4.0.2 valid=10s;
@@ -15,11 +21,6 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
         proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    # redirect routing from /* to /
-    location ~* ^(.*)$ {
-        rewrite ^(.*)$ / break;
     }
 
     error_page   500 502 503 504  /50x.html;
