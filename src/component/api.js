@@ -24,7 +24,7 @@ const ApiComponent = ({ accessToken }) => {
       setApiData(data?.body?.data);
       console.log(data);
     } catch (error) {
-      console.error("API 요청 에러:", error);
+      setApiData(null);
     }
   };
 
@@ -33,7 +33,7 @@ const ApiComponent = ({ accessToken }) => {
   }, [accessToken]);
 
   const handleImageClick = (imageInfo) => {
-    const { name, video_path, thumbnail_path } = imageInfo["value"];
+    const { video_path } = imageInfo["value"];
     saveCookie("/" + video_path); // 이미지 클릭 시 쿠키 저장 함수 호출
   };
 
@@ -47,7 +47,7 @@ const ApiComponent = ({ accessToken }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        const { Cookie, Domain, Link, VideoLink } = data.body;
+        const { Cookie, /* Domain, */ Link, VideoLink } = data.body;
 
         console.log("This is Cookie", Cookie);
 
@@ -80,7 +80,7 @@ const ApiComponent = ({ accessToken }) => {
   return (
     <div className="api-component">
       <div className="data-list-container">
-        {apiData ? (
+        {apiData !== null ? (
           Array.isArray(apiData) ? (
             <ul className="data-list">
               {apiData.map((value, index) => (
@@ -95,12 +95,12 @@ const ApiComponent = ({ accessToken }) => {
             </ul>
           ) : (
             <div>
-              <p>Data is Something wrong</p>
+              <p className="api-error">Data is Something wrong</p>
             </div>
           )
         ) : (
           <div>
-            <p>Can't Get items. Check your URL!</p>
+            <p className="api-error">Can't Get items. Check your URL!</p>
           </div>
         )}
       </div>

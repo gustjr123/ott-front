@@ -25,3 +25,8 @@
   margin-top: 10px;
   width: 100%;
 }
+
+.api-error {
+  color: white;
+  font-size: 20px;
+}
