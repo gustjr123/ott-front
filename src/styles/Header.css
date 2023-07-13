@@ -17,6 +17,7 @@
 }
 
 .logo-image {
+  padding-top: 10px;
   height: 45px;
 }
 
@@ -28,4 +29,10 @@
 
 .menu-icon {
   font-size: 24px;
+}
+
+@media (max-width: 600px) {
+  .logo-image {
+    height: 45px;
+  }
 }
