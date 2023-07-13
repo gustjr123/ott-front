@@ -9,8 +9,8 @@ import "../styles/LoginComponent.css";
 import logo from "../assets/images/logo.png";
 
 const poolData = {
-  UserPoolId: process.env.REACT_APP_USERPOOL_ID,
-  ClientId: process.env.REACT_APP_APPCLIENT_ID,
+  UserPoolId: process.env.REACT_APP_USERPOOL_ID2,
+  ClientId: process.env.REACT_APP_APPCLIENT_ID2,
 };
 
 const userPool = new CognitoUserPool(poolData);
@@ -19,11 +19,17 @@ const LoginComponent = ({ onLogin }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState("error");
   const [cognitoUser, setCognitoUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const storedToken = localStorage.getItem("accessToken");
+    if (storedToken) {
+      onLogin(storedToken);
+      navigate("/", { replace: true });
+    }
+
     const userData = {
       Username: username,
       Pool: userPool,
@@ -45,11 +51,6 @@ const LoginComponent = ({ onLogin }) => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    const userData = {
-      Username: username,
-      Pool: userPool,
-    };
-    setCognitoUser(new CognitoUser(userData));
 
     const authenticationData = {
       Username: username,
@@ -125,10 +126,11 @@ const LoginComponent = ({ onLogin }) => {
           onChange={handlePasswordChange}
           placeholder="비밀번호를 입력하세요"
         />
-        <button type="submit" className="login-button">
-          로그인
-        </button>
-        {/* {error && <p>{error}</p>} */}
+        {error && error.code !== "NewPasswordRequiredException" && (
+          <button type="submit" className="login-button">
+            로그인
+          </button>
+        )}
       </form>
       {error && error.code === "NewPasswordRequiredException" && (
         <form className="login-form" onSubmit={handleNewPassword}>

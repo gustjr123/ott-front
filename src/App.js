@@ -18,6 +18,7 @@ const App = () => {
   // 페이지 로드 시 로컬 스토리지에서 액세스 토큰을 가져와 상태로 설정
   useEffect(() => {
     const storedToken = localStorage.getItem("accessToken");
+    console.log(storedToken);
     if (storedToken) {
       setAccessToken(storedToken);
     }
@@ -70,7 +71,9 @@ const Home = ({ accessToken, onLogout }) => {
   return (
     <>
       <ApiComponent accessToken={accessToken} />
-      <button onClick={onLogout}>로그아웃</button>
+      <button className="logout-button" onClick={onLogout}>
+        로그아웃
+      </button>
     </>
   );
 };

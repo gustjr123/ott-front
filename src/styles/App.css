@@ -39,3 +39,14 @@ body {
     font-size: 24px;
   }
 }
+
+.logout-button {
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 50px;
+}
