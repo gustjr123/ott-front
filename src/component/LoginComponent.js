@@ -62,7 +62,7 @@ const LoginComponent = ({ onLogin }) => {
     cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: (result) => {
         console.log("Login success", result);
-        const accessToken = result.getAccessToken().getJwtToken();
+        const accessToken = result.getIdToken().getJwtToken(); // result.getAccessToken().getJwtToken();
         console.log(accessToken);
 
         // Save accessToken to state or localStorage if needed
