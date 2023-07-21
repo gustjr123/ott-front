@@ -29,3 +29,7 @@ API에 접근하기 위한 사용자 인가를 위한 OIDC 방식을 활용하�
 OIDC는 OAuth 2.0에서 확장하여 신원 인증을 추가한 프로토콜로 인가과정에서 사용자의 신원정보를 포함하여 완전한 신원관리를 위한 것이다.(IdToken)
 
 여기서 API Gateway의 권한 부여자를 위해서 인증에 사용되는 토큰은 OIDC를 위한 IdToken을 활용하여 인증을 한다.
+
+### 디자인 참고
+
+https://inpa.tistory.com/entry/CSS-%F0%9F%92%8D-%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%8A%A4%ED%83%80%EC%9D%BC-%F0%9F%96%8C%EF%B8%8F-%EB%AA%A8%EC%9D%8C
