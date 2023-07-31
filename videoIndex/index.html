@@ -4,14 +4,16 @@
     <title>Video Player</title>
     <!-- Include HLS.js library -->
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       body {
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: black;
-        height: 100vh;
-        margin: 0;
+        height: 100%;
+        /* width: 100%; */
+        margin-top: 200px;
       }
 
       .container {
@@ -27,15 +29,35 @@
       }
 
       #logo {
-        width: 100px;
+        width: 80px;
         height: auto;
         margin-bottom: 20px;
       }
 
       #videoContainer {
         width: 1280px;
-        height: 720px;
         position: relative;
+      }
+
+      /* 화면 가로 너비 800px 이하인 경우 */
+      @media (max-width: 800px) {
+        #videoContainer {
+          width: 640px;
+        }
+      }
+
+      /* 화면 가로 너비 600px 이하인 경우 */
+      @media (max-width: 600px) {
+        #videoContainer {
+          width: 480px;
+        }
+      }
+
+      /* 화면 가로 너비 600px 이하인 경우 */
+      @media (max-width: 500px) {
+        #videoContainer {
+          width: 380px;
+        }
       }
 
       #videoPlayer {
@@ -69,6 +91,18 @@
       } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
         video.src = linkURL;
       }
+
+      // 비디오의 원본 비율인 1280x720 유지하면서 화면에 맞추기
+      function resizeVideoContainer() {
+        const videoContainer = document.getElementById("videoContainer");
+        const containerWidth = videoContainer.clientWidth;
+        const targetHeight = (containerWidth * 720) / 1280;
+        videoContainer.style.height = `${targetHeight}px`;
+      }
+
+      // 페이지 로드 후 및 창 크기 조정 시에 비디오 크기 조정
+      window.addEventListener("load", resizeVideoContainer);
+      window.addEventListener("resize", resizeVideoContainer);
     </script>
   </body>
 </html>
