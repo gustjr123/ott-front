@@ -1,26 +1,33 @@
-# Vod Project
+# OTT 서비스 Front APP
 
-This project start for vod app for front
+OTT Front APP 부분 개발
 
-## Available Scripts
+![image](https://github.com/gustjr123/vod-front/assets/26512495/60eaf729-5aad-48de-9406-4a62ab51af76)
+![image](https://github.com/gustjr123/vod-front/assets/26512495/4042fa48-f47d-4954-9043-15f7067e50e1)
 
-In the project directory, you can run:
+- - -
 
-### `npm start`
+## 명령어
+#### 실행
+``` bash
+npm start
+```
+#### 정적파일 생성 (빌드)
+``` bash
+npm run build
+```
 
-어플리케이션 실행
+- - -
 
-### `npm run build`
-
-배포용 build파일 생성
-
-## cloud front 사용법 주의
+## cloud front 사용 시 주의
 
 ※ 영상 or 썸네일[s3 저장된 파일] 제목에 공백(' ') 또는 한글이 포함되면 안된다.
 
-[추가] ALB 리스터 80포트를 443 root(/)로 리디렉션하도록 설정
+- - -
 
-[추가] API 접근을 위한 Access Token 관련 설명
+## 참고 사항
+
+- API 접근을 위한 Access Token 관련 설명
 
 API에 접근하기 위한 사용자 인가를 위한 OIDC 방식을 활용하는 것이다.
 
